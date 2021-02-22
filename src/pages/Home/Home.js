@@ -1,45 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { SearchBar, FilterRegion, CountryCard } from "./components";
 import { HomeContainer, PersonalLink } from "./Home.elements";
-import axios from "axios";
 import uuid from "react-uuid";
-import { Link } from "react-router-dom";
+import { useAppContext } from "../../context/context";
 
 const Home = () => {
-	const countriesPerPage = 10;
-	const [next, setNext] = useState(10);
-	const [countries, setCountries] = useState([]);
-	const [countriesDisplay, setCountriesDisplay] = useState([]);
-
-	const loopWithSlice = (start, end) => {
-		const sliceCountries = countries.slice(start, end);
-		setCountriesDisplay(() => [...countriesDisplay, ...sliceCountries]);
-		console.log("loop with slice");
-	};
-
-	const fetchData = async () => {
-		const response = await axios.get(
-			"https://restcountries.eu/rest/v2/all"
-		);
-		const data = response.data;
-		setCountries(() => [...data]);
-		setCountriesDisplay(() => data.slice(0, 10));
-		console.log("fetchData() function");
-	};
+	const {
+		fetchData,
+		countries,
+		setCountriesDisplay,
+		countriesDisplay,
+	} = useAppContext();
 
 	useEffect(() => {
 		fetchData();
 	}, []);
 
-	const loadMoreCountries = () => {
-		loopWithSlice(next, next + countriesPerPage);
-		setNext(next + countriesPerPage);
-	};
-
 	return (
 		<HomeContainer>
 			<SearchBar />
-			<FilterRegion />
+			<FilterRegion
+				countries={countries}
+				setCountriesDisplay={setCountriesDisplay}
+			/>
 			{countriesDisplay.map(country => (
 				<PersonalLink to={`/${country.alpha3Code}`}>
 					<CountryCard
@@ -52,8 +35,6 @@ const Home = () => {
 					/>
 				</PersonalLink>
 			))}
-
-			<button onClick={loadMoreCountries}>...Load more countries</button>
 		</HomeContainer>
 	);
 };

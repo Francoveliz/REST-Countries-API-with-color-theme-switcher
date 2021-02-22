@@ -1,17 +1,28 @@
 import React from "react";
 import { DropDownList } from "./FilterRegion.elements";
 
-const FilterRegion = () => {
+const FilterRegion = ({ countries, setCountriesDisplay }) => {
+	const filterByRegion = region => {
+		if (region) {
+			const filterCountries = countries.filter(
+				country => country.region === region
+			);
+			setCountriesDisplay(() => filterCountries);
+		} else {
+			setCountriesDisplay(countries);
+		}
+	};
+
 	return (
-		<DropDownList>
+		<DropDownList onChange={e => filterByRegion(e.target.value)}>
 			<option value="" selected>
 				Filter by Region
 			</option>
-			<option value="africa">Africa</option>
-			<option value="europe">America</option>
-			<option value="americas">Asia</option>
-			<option value="asia">Europe</option>
-			<option value="oceania">Oceania</option>
+			<option value="Africa">Africa</option>
+			<option value="Americas">America</option>
+			<option value="Asia">Asia</option>
+			<option value="Europe">Europe</option>
+			<option value="Oceania">Oceania</option>
 		</DropDownList>
 	);
 };

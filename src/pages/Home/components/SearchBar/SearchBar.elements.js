@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const SearchBarContainer = styled.div`
+export const SearchBarContainer = styled.form`
 	display: flex;
 	align-items: center;
 	margin: 0 1rem 1rem;
 	height: 3rem;
-	background-color: hsl(209, 23%, 22%);
+	background-color: ${props => props.theme.elements};
 	border: none;
 	color: #fff;
 	padding: 0 2rem;
@@ -16,14 +16,14 @@ export const SearchBarElement = styled.input.attrs({
 	type: "text",
 })`
 	outline: none;
-	background-color: hsl(209, 23%, 22%);
+	background-color: ${props => props.theme.elements};
 	border: none;
 	color: #fff;
 	width: 100%;
 	align-self: stretch;
 
 	&::placeholder {
-		color: #fff;
+		color: ${props => props.theme.inputText};
 	}
 `;
 

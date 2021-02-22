@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Nav = styled.nav`
 	display: flex;
-	background-color: hsl(209, 23%, 22%);
+	background-color: ${props => props.theme.elements};
 	padding: 2rem 1rem;
 	justify-content: space-between;
 	margin-bottom: 1.5rem;

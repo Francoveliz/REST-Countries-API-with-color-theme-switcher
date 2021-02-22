@@ -1,22 +1,20 @@
 import React from "react";
-import styled from "styled-components";
 import Moon from "../../../../assets/images/moon.svg";
-import { MoonIcon } from "./DarkMode.elements";
-
-const Test = styled.div`
-	margin: 0;
-	display: flex;
-	align-items: center;
-`;
+import { MoonIcon, DarkModeContainer } from "./DarkMode.elements";
+import { useAppContext } from "../../../../context/context";
 
 const DarkMode = () => {
+	const { theme, setTheme } = useAppContext();
+
+	const onClickHandler = () => {
+		theme === "dark" ? setTheme("light") : setTheme("dark");
+	};
+
 	return (
-		<>
-			<Test>
-				<MoonIcon src={Moon} alt="" />
-				<span>Dark Mode</span>
-			</Test>
-		</>
+		<DarkModeContainer onClick={onClickHandler}>
+			<MoonIcon src={Moon} alt="" />
+			<span>Dark Mode</span>
+		</DarkModeContainer>
 	);
 };
 

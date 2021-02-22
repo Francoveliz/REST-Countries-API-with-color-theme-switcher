@@ -6,7 +6,7 @@ export const CountryCardContainer = styled.section`
 `;
 
 export const CountryCardText = styled.div`
-	background-color: hsl(209, 23%, 22%);
+	background-color: ${props => props.theme.elements};
 	padding: 1.5rem;
 	border-radius: 5px;
 `;
