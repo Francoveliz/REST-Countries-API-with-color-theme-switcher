@@ -1,6 +1,6 @@
 import React from "react";
-import Moon from "../../../../assets/images/moon.svg";
-import { MoonIcon, DarkModeContainer } from "./DarkMode.elements";
+
+import { StyledMoon, DarkModeContainer } from "./DarkMode.elements";
 import { useAppContext } from "../../../../context/context";
 
 const DarkMode = () => {
@@ -12,7 +12,7 @@ const DarkMode = () => {
 
 	return (
 		<DarkModeContainer onClick={onClickHandler}>
-			<MoonIcon src={Moon} alt="" />
+			<StyledMoon />
 			<span>Dark Mode</span>
 		</DarkModeContainer>
 	);

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import loupe from "../../../../assets/images/search.svg";
 import axios from "axios";
 import { useAppContext } from "../../../../context/context";
 import {
 	SearchBarContainer,
 	SearchBarElement,
-	SearchIcon,
+	Loupe,
 } from "./SearchBar.elements";
 
 const SearchBar = () => {
@@ -28,7 +27,7 @@ const SearchBar = () => {
 
 	return (
 		<SearchBarContainer onSubmit={e => onSubmitHandler(e)}>
-			<SearchIcon src={loupe} />
+			<Loupe />
 			<SearchBarElement
 				value={searchText}
 				onChange={e => searchOnChangeHandler(e)}
