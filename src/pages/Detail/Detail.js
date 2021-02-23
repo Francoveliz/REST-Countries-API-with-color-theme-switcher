@@ -3,13 +3,11 @@ import axios from "axios";
 import {
 	Flag,
 	DetailContainer,
-	Button,
 	LeftArrow,
 	Bold,
 	Name,
 	LinkStyled,
 } from "./Detail.elements";
-import leftArrow from "../../assets/images/left-arrow.svg";
 
 const Detail = ({ match }) => {
 	const [data, setData] = useState({
@@ -46,7 +44,7 @@ const Detail = ({ match }) => {
 	return (
 		<DetailContainer>
 			<LinkStyled to="/">
-				<LeftArrow src={leftArrow} alt="left arrow" />
+				<LeftArrow />
 				Back
 			</LinkStyled>
 			<Flag src={flag} />
@@ -95,7 +93,7 @@ const Detail = ({ match }) => {
 				<Bold>border countries: </Bold>
 				{borders.map((el, index) => (
 					<LinkStyled to={`/${el}`} key={index}>
-						{el},{" "}
+						{el}
 					</LinkStyled>
 				))}
 			</p>

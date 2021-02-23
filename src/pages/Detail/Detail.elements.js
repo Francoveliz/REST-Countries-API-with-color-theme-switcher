@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { ReactComponent as LeftArrowIcon } from "../../assets/images/left-arrow.svg";
+
 import { Link } from "react-router-dom";
 
 export const DetailContainer = styled.div`
@@ -28,9 +30,11 @@ export const Flag = styled.img`
 	margin: 4rem 0;
 `;
 
-export const LeftArrow = styled.img`
-	height: 1.3rem;
+export const LeftArrow = styled(LeftArrowIcon)`
+	height: 1.2rem;
+	width: 1.2rem;
 	margin-right: 1rem;
+	fill: ${props => props.theme.text};
 `;
 
 export const Name = styled.h2`
@@ -46,4 +50,9 @@ export const Bold = styled.span`
 export const LinkStyled = styled(Link)`
 	color: inherit;
 	text-decoration: none;
+	border-radius: 5px;
+	background-color: ${props => props.theme.elements};
+	padding: 0.5rem 1.5rem;
+	display: flex;
+	align-items: center;
 `;
