@@ -56,3 +56,14 @@ export const LinkStyled = styled(Link)`
 	display: flex;
 	align-items: center;
 `;
+
+export const BorderBtn = styled(LinkStyled)`
+	display: block;
+	margin: 0 1rem 1rem 0;
+`;
+
+export const BordersContainer = styled.div`
+	margin: 1rem 0;
+	display: flex;
+	flex-wrap: wrap;
+`;

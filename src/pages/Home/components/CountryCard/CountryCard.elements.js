@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const CountryCardContainer = styled.section`
 	margin: 2rem 3rem;
@@ -23,4 +22,8 @@ export const Name = styled.p`
 
 export const Bold = styled.span`
 	font-weight: 600;
+`;
+
+export const BordersContainer = styled.div`
+	display: flex;
 `;

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useAppContext } from "../../context/context";
 import axios from "axios";
 import {
 	Flag,
@@ -7,9 +8,12 @@ import {
 	Bold,
 	Name,
 	LinkStyled,
+	BorderBtn,
+	BordersContainer,
 } from "./Detail.elements";
 
 const Detail = ({ match }) => {
+	const { countries } = useAppContext();
 	const [data, setData] = useState({
 		currencies: [],
 		languages: [],
@@ -91,11 +95,13 @@ const Detail = ({ match }) => {
 			</p>
 			<p>
 				<Bold>border countries: </Bold>
-				{borders.map((el, index) => (
-					<LinkStyled to={`/${el}`} key={index}>
-						{el}
-					</LinkStyled>
-				))}
+				<BordersContainer>
+					{borders.map((border, index) => (
+						<BorderBtn to={`/${border}`} key={index}>
+							{countries.filter(el => el.alpha3Code === border)[0].name}
+						</BorderBtn>
+					))}
+				</BordersContainer>
 			</p>
 		</DetailContainer>
 	);
