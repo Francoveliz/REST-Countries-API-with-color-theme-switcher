@@ -97,7 +97,10 @@ const Detail = ({ match }) => {
 				<Bold>border countries: </Bold>
 				<BordersContainer>
 					{borders.map((border, index) => (
-						<BorderBtn to={`/${border}`} key={index}>
+						<BorderBtn
+							onClick={() => window.scrollTo(0, 0)}
+							to={`/${border}`}
+							key={index}>
 							{countries.filter(el => el.alpha3Code === border)[0].name}
 						</BorderBtn>
 					))}
