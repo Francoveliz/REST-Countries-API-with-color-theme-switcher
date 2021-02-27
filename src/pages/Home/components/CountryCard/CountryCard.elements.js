@@ -1,9 +1,14 @@
 import styled from "styled-components";
+import { device } from "../../../../assets/style/device";
 
 export const CountryCardContainer = styled.section`
 	margin: 2rem 3rem;
 	display: flex;
 	flex-direction: column;
+	@media${device.desktop} {
+		margin: 8rem 2rem;
+		border: 1px solid red;
+	}
 `;
 
 export const CountryCardText = styled.div`
@@ -13,7 +18,6 @@ export const CountryCardText = styled.div`
 `;
 
 export const Flag = styled.img`
-	width: 100%;
 	border-radius: 5px 5px 0 0;
 `;
 

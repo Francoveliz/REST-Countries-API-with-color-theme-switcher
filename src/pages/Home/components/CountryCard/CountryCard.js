@@ -9,6 +9,7 @@ import {
 } from "./CountryCard.elements";
 
 const CountryCard = ({ flag, name, population, region, capital }) => {
+	console.log("red");
 	return (
 		<CountryCardContainer>
 			<Flag src={flag} alt="" />
