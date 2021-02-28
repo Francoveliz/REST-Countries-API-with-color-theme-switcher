@@ -1,34 +1,43 @@
 import React from "react";
 
 import {
-	CountryCardContainer,
+	StyledLink,
 	CountryCardText,
 	Flag,
 	Name,
 	Bold,
+	Container,
 } from "./CountryCard.elements";
 
-const CountryCard = ({ flag, name, population, region, capital }) => {
-	console.log("red");
+const CountryCard = ({
+	flag,
+	name,
+	population,
+	region,
+	capital,
+	alpha3Code,
+}) => {
 	return (
-		<CountryCardContainer>
-			<Flag src={flag} alt="" />
-			<CountryCardText>
-				<Name>{name}</Name>
-				<p>
-					<Bold>Population: </Bold>
-					{population}
-				</p>
-				<p>
-					<Bold>Region: </Bold>
-					{region}
-				</p>
-				<p>
-					<Bold>Capital: </Bold>
-					{capital}
-				</p>
-			</CountryCardText>
-		</CountryCardContainer>
+		<Container>
+			<StyledLink to={`/${alpha3Code}`}>
+				<Flag src={flag} alt="" />
+				<CountryCardText>
+					<Name>{name}</Name>
+					<p>
+						<Bold>Population: </Bold>
+						{population}
+					</p>
+					<p>
+						<Bold>Region: </Bold>
+						{region}
+					</p>
+					<p>
+						<Bold>Capital: </Bold>
+						{capital}
+					</p>
+				</CountryCardText>
+			</StyledLink>
+		</Container>
 	);
 };
 

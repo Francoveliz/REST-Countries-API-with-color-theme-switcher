@@ -1,14 +1,12 @@
 import styled from "styled-components";
-import { device } from "../../../../assets/style/device";
+import { Link } from "react-router-dom";
 
-export const CountryCardContainer = styled.section`
+export const StyledLink = styled(Link)`
 	margin: 2rem 3rem;
 	display: flex;
 	flex-direction: column;
-	@media${device.desktop} {
-		margin: 8rem 2rem;
-		border: 1px solid red;
-	}
+	text-decoration: none;
+	color: inherit;
 `;
 
 export const CountryCardText = styled.div`
@@ -29,3 +27,5 @@ export const Name = styled.p`
 export const Bold = styled.span`
 	font-weight: 600;
 `;
+
+export const Container = styled.section``;
