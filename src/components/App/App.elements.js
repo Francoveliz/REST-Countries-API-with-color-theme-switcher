@@ -5,5 +5,7 @@ export const AppContainer = styled.div`
 	height: 100%;
 	min-height: 100vh;
 	color: ${props => props.theme.text};
-	min-width: 100vw;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
 `;

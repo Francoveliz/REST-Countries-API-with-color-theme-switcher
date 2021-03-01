@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { device } from "../../../../assets/style/device";
 
 export const StyledLink = styled(Link)`
 	margin: 2rem 3rem;
@@ -28,4 +29,8 @@ export const Bold = styled.span`
 	font-weight: 600;
 `;
 
-export const Container = styled.section``;
+export const Container = styled.section`
+	@media${device.desktop} {
+		width: 25%;
+	}
+`;

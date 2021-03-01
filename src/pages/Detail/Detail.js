@@ -9,7 +9,12 @@ import {
 	Name,
 	LinkStyled,
 	BorderBtn,
-	BordersContainer,
+	BorderCountries,
+	BorderCountriesContainer,
+	Text,
+	DetailContent,
+	BorderCountriesTitle,
+	Info,
 } from "./Detail.elements";
 
 const Detail = ({ match }) => {
@@ -42,6 +47,7 @@ const Detail = ({ match }) => {
 	};
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		fetchData();
 	}, [match.params.code]);
 
@@ -51,61 +57,72 @@ const Detail = ({ match }) => {
 				<LeftArrow />
 				Back
 			</LinkStyled>
-			<Flag src={flag} />
-			<Name>{name}</Name>
-			<p>
-				<Bold>Native name: </Bold>
-				{nativeName}
-			</p>
-			<p>
-				<Bold>Population: </Bold>
-				{population}
-			</p>
-			<p>
-				<Bold>region: </Bold>
-				{region}
-			</p>
-			<p>
-				<Bold>sub region: </Bold>
-				{subregion}
-			</p>
-			<p>
-				<Bold>capital: </Bold>
-				{capital}
-			</p>
-			<p>
-				<Bold>top level domain: </Bold>
-				{topLevelDomain}
-			</p>
-			<p>
-				<Bold>currencies: </Bold>
-				{currencies.map((el, index) => (
-					<span key={index}>{el.name}, </span>
-				))}
-			</p>
-			<p>
-				<Bold>languages: </Bold>
-				{languages.map((el, index) => (
-					<span key={index}>{el.name}, </span>
-				))}
-			</p>
-			<p>
-				<Bold>region: </Bold>
-				{region}
-			</p>
-			<p>
-				<Bold>border countries: </Bold>
-				<BordersContainer>
-					{borders.map((border, index) => (
-						<BorderBtn
-							onClick={() => window.scrollTo(0, 0)}
-							to={`/${border}`}
-							key={index}>
-							{countries.filter(el => el.alpha3Code === border)[0].name}
-						</BorderBtn>
-					))}
-				</BordersContainer>
-			</p>
+			<DetailContent>
+				<Flag src={flag} />
+				<Text>
+					<Name>{name}</Name>
+					<Info>
+						<p>
+							<Bold>Native name: </Bold>
+							{nativeName}
+						</p>
+						<p>
+							<Bold>Population: </Bold>
+							{population}
+						</p>
+						<p>
+							<Bold>region: </Bold>
+							{region}
+						</p>
+						<p>
+							<Bold>sub region: </Bold>
+							{subregion}
+						</p>
+						<p>
+							<Bold>capital: </Bold>
+							{capital}
+						</p>
+						<p>
+							<Bold>top level domain: </Bold>
+							{topLevelDomain}
+						</p>
+						<p>
+							<Bold>currencies: </Bold>
+							{currencies.map((el, index) => (
+								<span key={index}>{el.name}, </span>
+							))}
+						</p>
+						<p>
+							<Bold>languages: </Bold>
+							{languages.map((el, index) => (
+								<span key={index}>{el.name}, </span>
+							))}
+						</p>
+						<p>
+							<Bold>region: </Bold>
+							{region}
+						</p>
+					</Info>
+					<BorderCountriesContainer>
+						<BorderCountries>
+							<BorderCountriesTitle>
+								border countries:{" "}
+							</BorderCountriesTitle>
+							{borders.map((border, index) => (
+								<BorderBtn
+									onClick={() => window.scrollTo(0, 0)}
+									to={`/${border}`}
+									key={index}>
+									{
+										countries.filter(el => el.alpha3Code === border)[0]
+											.name
+									}
+								</BorderBtn>
+							))}
+						</BorderCountries>
+					</BorderCountriesContainer>
+				</Text>
+			</DetailContent>
 		</DetailContainer>
 	);
 };
