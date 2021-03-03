@@ -1,19 +1,19 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { device } from "../../../../assets/style/device";
+import { Button } from "../../../../components/Button/Button.elements";
 
-export const StyledLink = styled(Link)`
-	margin: 2rem 3rem;
-	display: flex;
-	flex-direction: column;
-	text-decoration: none;
-	color: inherit;
+export const ViewMoreBtn = styled(Button)`
+	background-color: ${props => props.theme.background};
+	align-self: flex-end;
 `;
 
 export const CountryCardText = styled.div`
 	background-color: ${props => props.theme.elements};
 	padding: 1.5rem;
 	border-radius: 0 0 5px 5px;
+	display: flex;
+	flex-direction: column;
 `;
 
 export const Flag = styled.img`
@@ -30,6 +30,10 @@ export const Bold = styled.span`
 `;
 
 export const Container = styled.section`
+	margin: 2rem 3rem;
+	display: flex;
+	flex-direction: column;
+
 	@media${device.desktop} {
 		width: 25%;
 	}

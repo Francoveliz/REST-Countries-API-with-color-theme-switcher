@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ReactComponent as LeftArrowIcon } from "../../assets/images/left-arrow.svg";
 import { device } from "../../assets/style/device";
+import { Button } from "../../components/Button/Button.elements";
 
 import { Link } from "react-router-dom";
 
@@ -8,7 +9,7 @@ export const DetailContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding: 1rem;
+	padding: 1rem 1rem 5rem 1rem;
 	font-size: 1.2rem;
 	@media${device.desktop} {
 		display: grid;
@@ -19,18 +20,6 @@ export const DetailContainer = styled.div`
 			"back-btn"
 			"content";
 	}
-`;
-
-export const Button = styled.button`
-	background-color: hsl(209, 23%, 22%);
-	color: #fff;
-	border-radius: 2px;
-	border: none;
-	outline: none;
-	padding: 0.5rem 1.8rem;
-	max-width: initial;
-	display: flex;
-	align-items: center;
 `;
 
 export const DetailContent = styled.div`
@@ -80,17 +69,7 @@ export const Bold = styled.span`
 	white-space: nowrap;
 `;
 
-export const LinkStyled = styled(Link)`
-	color: inherit;
-	text-decoration: none;
-	border-radius: 5px;
-	background-color: ${props => props.theme.elements};
-	padding: 0.5rem 1.5rem;
-	display: flex;
-	align-items: center;
-`;
-
-export const BorderBtn = styled(LinkStyled)`
+export const BorderBtn = styled(Button)`
 	display: flex;
 	margin: 0 1rem 1rem 0;
 	height: 2rem;
@@ -141,5 +120,12 @@ export const Info = styled.div`
 		grid-area: info;
 		column-count: 2;
 		margin-bottom: 3rem;
+	}
+`;
+
+export const BackBtn = styled(Button)`
+	@media${device.desktop} {
+		grid-area: back-btn;
+		justify-self: start;
 	}
 `;

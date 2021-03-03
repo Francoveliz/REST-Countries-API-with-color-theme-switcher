@@ -7,7 +7,7 @@ import {
 	LeftArrow,
 	Bold,
 	Name,
-	LinkStyled,
+	BackBtn,
 	BorderBtn,
 	BorderCountries,
 	BorderCountriesContainer,
@@ -51,12 +51,29 @@ const Detail = ({ match }) => {
 		fetchData();
 	}, [match.params.code]);
 
+	const setBorderCountriesBtns = borders.map((border, index) => (
+		<BorderBtn
+			onClick={() => window.scrollTo(0, 0)}
+			to={`/${border}`}
+			key={index}>
+			{countries.filter(el => el.alpha3Code === border)[0].name}
+		</BorderBtn>
+	));
+
+	const setLanguages = languages.map((el, index) => (
+		<span key={index}>{el.name}, </span>
+	));
+
+	const setCurrencies = currencies.map((el, index) => (
+		<span key={index}>{el.name}, </span>
+	));
+
 	return (
 		<DetailContainer>
-			<LinkStyled to="/">
+			<BackBtn to="/">
 				<LeftArrow />
 				Back
-			</LinkStyled>
+			</BackBtn>
 			<DetailContent>
 				<Flag src={flag} />
 				<Text>
@@ -88,15 +105,11 @@ const Detail = ({ match }) => {
 						</p>
 						<p>
 							<Bold>currencies: </Bold>
-							{currencies.map((el, index) => (
-								<span key={index}>{el.name}, </span>
-							))}
+							{setCurrencies}
 						</p>
 						<p>
 							<Bold>languages: </Bold>
-							{languages.map((el, index) => (
-								<span key={index}>{el.name}, </span>
-							))}
+							{setLanguages}
 						</p>
 						<p>
 							<Bold>region: </Bold>
@@ -108,17 +121,7 @@ const Detail = ({ match }) => {
 							<BorderCountriesTitle>
 								border countries:{" "}
 							</BorderCountriesTitle>
-							{borders.map((border, index) => (
-								<BorderBtn
-									onClick={() => window.scrollTo(0, 0)}
-									to={`/${border}`}
-									key={index}>
-									{
-										countries.filter(el => el.alpha3Code === border)[0]
-											.name
-									}
-								</BorderBtn>
-							))}
+							{setBorderCountriesBtns}
 						</BorderCountries>
 					</BorderCountriesContainer>
 				</Text>

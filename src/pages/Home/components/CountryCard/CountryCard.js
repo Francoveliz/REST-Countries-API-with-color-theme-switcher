@@ -1,7 +1,7 @@
 import React from "react";
 
 import {
-	StyledLink,
+	ViewMoreBtn,
 	CountryCardText,
 	Flag,
 	Name,
@@ -19,24 +19,23 @@ const CountryCard = ({
 }) => {
 	return (
 		<Container>
-			<StyledLink to={`/${alpha3Code}`}>
-				<Flag src={flag} alt="" />
-				<CountryCardText>
-					<Name>{name}</Name>
-					<p>
-						<Bold>Population: </Bold>
-						{population}
-					</p>
-					<p>
-						<Bold>Region: </Bold>
-						{region}
-					</p>
-					<p>
-						<Bold>Capital: </Bold>
-						{capital}
-					</p>
-				</CountryCardText>
-			</StyledLink>
+			<Flag src={flag} alt="" />
+			<CountryCardText>
+				<Name>{name}</Name>
+				<p>
+					<Bold>Population: </Bold>
+					{population}
+				</p>
+				<p>
+					<Bold>Region: </Bold>
+					{region}
+				</p>
+				<p>
+					<Bold>Capital: </Bold>
+					{capital}
+				</p>
+				<ViewMoreBtn to={`/${alpha3Code}`}>...View more </ViewMoreBtn>
+			</CountryCardText>
 		</Container>
 	);
 };

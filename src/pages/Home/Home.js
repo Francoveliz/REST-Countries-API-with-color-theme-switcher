@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { SearchBar, FilterRegion, CountryCard } from "./components";
-import { HomeContainer, CountriesContainer } from "./Home.elements";
+import {
+	HomeContainer,
+	CountriesContainer,
+	Filters,
+	Button,
+} from "./Home.elements";
+
 import uuid from "react-uuid";
 import { useAppContext } from "../../context/context";
 
@@ -18,11 +24,13 @@ const Home = () => {
 
 	return (
 		<HomeContainer>
-			<SearchBar />
-			<FilterRegion
-				countries={countries}
-				setCountriesDisplay={setCountriesDisplay}
-			/>
+			<Filters>
+				<SearchBar />
+				<FilterRegion
+					countries={countries}
+					setCountriesDisplay={setCountriesDisplay}
+				/>
+			</Filters>
 			<CountriesContainer>
 				{countriesDisplay.map(country => (
 					<CountryCard
