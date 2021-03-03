@@ -24,7 +24,7 @@ export const SearchBarElement = styled.input.attrs({
 	outline: none;
 	background-color: ${props => props.theme.elements};
 	border: none;
-	color: #fff;
+	color: ${props => props.theme.text};
 	width: 100%;
 	align-self: stretch;
 
@@ -38,4 +38,5 @@ export const Loupe = styled(LoupeIcon)`
 	width: 1rem;
 	fill: ${props => props.theme.text};
 	margin-right: 1.5rem;
+	cursor: pointer;
 `;

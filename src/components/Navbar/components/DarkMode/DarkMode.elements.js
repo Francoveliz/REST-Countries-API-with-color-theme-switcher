@@ -7,6 +7,7 @@ export const DarkModeContainer = styled.div`
 	margin: 0;
 	display: flex;
 	align-items: center;
+	cursor: pointer;
 `;
 
 export const StyledMoon = styled(Moon)`

@@ -15,7 +15,7 @@ const SearchBar = () => {
 		setSearchText(e.target.value);
 	};
 
-	const onSubmitHandler = async e => {
+	const getSearch = async e => {
 		e.preventDefault();
 		const response = await axios.get(
 			`https://restcountries.eu/rest/v2/name/${searchText}`
@@ -26,8 +26,8 @@ const SearchBar = () => {
 	};
 
 	return (
-		<SearchBarContainer onSubmit={e => onSubmitHandler(e)}>
-			<Loupe />
+		<SearchBarContainer onSubmit={e => getSearch(e)}>
+			<Loupe onClick={getSearch} />
 			<SearchBarElement
 				value={searchText}
 				onChange={e => searchOnChangeHandler(e)}

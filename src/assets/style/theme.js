@@ -1,6 +1,6 @@
 export const lightTheme = {
 	elements: "hsl(0, 0%, 100%)",
-	background: "hsl(0, 0%, 93%)",
+	background: "#ecf0f1",
 	text: "hsl(200, 15%, 8%)",
 	inputText: "hsl(0, 0%, 52%)",
 };
