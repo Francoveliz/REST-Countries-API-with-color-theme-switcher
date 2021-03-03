@@ -85,7 +85,6 @@ export const BorderCountriesTitle = styled(Bold)`
 export const BorderCountries = styled.div`
 	margin: 1rem 0;
 	display: flex;
-
 	flex-wrap: wrap;
 	@media${device.desktop} {
 		align-items: center;

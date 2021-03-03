@@ -9,7 +9,7 @@ export const DropDownList = styled.select`
 	border-radius: 5px;
 	outline: none;
 	border: none;
-
+	cursor: pointer;
 	& > * {
 		min-width: 100vw;
 	}
