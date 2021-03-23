@@ -5,7 +5,6 @@ import { device } from "../../../../assets/style/device";
 export const SearchBarContainer = styled.form`
 	display: flex;
 	align-items: center;
-	margin: 0 1rem 1rem;
 	height: 3rem;
 	background-color: ${props => props.theme.elements};
 	border: none;

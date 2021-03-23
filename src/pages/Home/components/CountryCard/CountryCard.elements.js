@@ -18,6 +18,10 @@ export const CountryCardText = styled.div`
 
 export const Flag = styled.img`
 	border-radius: 5px 5px 0 0;
+	width: 100%;
+	min-height: 20rem;
+	max-height: 20rem;
+	object-fit: cover;
 `;
 
 export const Name = styled.p`
@@ -29,12 +33,4 @@ export const Bold = styled.span`
 	font-weight: 600;
 `;
 
-export const Container = styled.section`
-	margin: 2rem 3rem;
-	display: flex;
-	flex-direction: column;
-
-	@media${device.desktop} {
-		width: 25%;
-	}
-`;
+export const Container = styled.section``;

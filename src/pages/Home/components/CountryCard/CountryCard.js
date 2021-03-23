@@ -1,5 +1,3 @@
-import React from "react";
-
 import {
 	ViewMoreBtn,
 	CountryCardText,
@@ -8,6 +6,10 @@ import {
 	Bold,
 	Container,
 } from "./CountryCard.elements";
+import Grid from "@material-ui/core/Grid";
+import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 
 const CountryCard = ({
 	flag,
@@ -18,7 +20,7 @@ const CountryCard = ({
 	alpha3Code,
 }) => {
 	return (
-		<Container>
+		<Grid item lg={4}>
 			<Flag src={flag} alt="" />
 			<CountryCardText>
 				<Name>{name}</Name>
@@ -34,9 +36,20 @@ const CountryCard = ({
 					<Bold>Capital: </Bold>
 					{capital}
 				</p>
-				<ViewMoreBtn to={`/${alpha3Code}`}>...View more </ViewMoreBtn>
+				{/* <ViewMoreBtn to={`/${alpha3Code}`}>...View more </ViewMoreBtn> */}
+				<Box display="flex" justifyContent="flex-end">
+					<Box display="block" mt={3}>
+						<Button variant="contained" color="primary">
+							<Link
+								style={{ textDecoration: "none", color: "#fff" }}
+								to={`/${alpha3Code}`}>
+								...View more
+							</Link>
+						</Button>
+					</Box>
+				</Box>
 			</CountryCardText>
-		</Container>
+		</Grid>
 	);
 };
 

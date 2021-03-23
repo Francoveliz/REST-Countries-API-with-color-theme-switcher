@@ -16,6 +16,10 @@ import {
 	BorderCountriesTitle,
 	Info,
 } from "./Detail.elements";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+
+import { Link } from "react-router-dom";
 
 const Detail = ({ match }) => {
 	const { countries } = useAppContext();
@@ -52,12 +56,24 @@ const Detail = ({ match }) => {
 	}, [match.params.code]);
 
 	const setBorderCountriesBtns = borders.map((border, index) => (
-		<BorderBtn
-			onClick={() => window.scrollTo(0, 0)}
-			to={`/${border}`}
-			key={index}>
-			{countries.filter(el => el.alpha3Code === border)[0].name}
-		</BorderBtn>
+		// <BorderBtn
+		// 	onClick={() => window.scrollTo(0, 0)}
+		// 	to={`/${border}`}
+		// 	key={index}>
+		// 	{countries.filter(el => el.alpha3Code === border)[0].name}
+		// </BorderBtn>
+		<Box m={1} key={index}>
+			<Button
+				onClick={() => window.scrollTo(0, 0)}
+				variant="contained"
+				color="primary">
+				<Link
+					to={`/${border}`}
+					style={{ textDecoration: "none", color: "#fff" }}>
+					{countries.filter(el => el.alpha3Code === border)[0].name}
+				</Link>
+			</Button>
+		</Box>
 	));
 
 	const setLanguages = languages.map((el, index) => (
@@ -70,10 +86,20 @@ const Detail = ({ match }) => {
 
 	return (
 		<DetailContainer>
-			<BackBtn to="/">
+			{/* <BackBtn to="/">
 				<LeftArrow />
 				Back
-			</BackBtn>
+			</BackBtn> */}
+			<Box display="block">
+				<Link style={{ textDecoration: "none" }} to="/">
+					<Button
+						variant="contained"
+						color="primary"
+						startIcon={<LeftArrow />}>
+						Back
+					</Button>
+				</Link>
+			</Box>
 			<DetailContent>
 				<Flag src={flag} />
 				<Text>
@@ -119,7 +145,7 @@ const Detail = ({ match }) => {
 					<BorderCountriesContainer>
 						<BorderCountries>
 							<BorderCountriesTitle>
-								border countries:{" "}
+								border countries:
 							</BorderCountriesTitle>
 							{setBorderCountriesBtns}
 						</BorderCountries>

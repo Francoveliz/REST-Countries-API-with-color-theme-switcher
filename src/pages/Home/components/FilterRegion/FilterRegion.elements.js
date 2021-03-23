@@ -5,7 +5,6 @@ export const DropDownList = styled.select`
 	color: ${props => props.theme.text};
 	height: 3rem;
 	padding: 0 1.5rem;
-	margin: 0 1rem;
 	border-radius: 5px;
 	outline: none;
 	border: none;
