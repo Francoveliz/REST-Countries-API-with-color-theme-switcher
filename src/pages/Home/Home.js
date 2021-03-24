@@ -10,6 +10,7 @@ import uuid from "react-uuid";
 import { useAppContext } from "../../context/context";
 import { Container, Grid, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { FixedSizeList } from "react-window";
 
 const useStyles = makeStyles(theme => ({
 	filters: {
@@ -38,6 +39,29 @@ const Home = () => {
 		fetchData();
 	}, []);
 
+	const Row = ({ index, style }) => (
+		<div style={style}>
+			<CountryCard
+				name={countries[index].name}
+				flag={countries[index].flag}
+				population={countries[index].population}
+				region={countries[index].region}
+				capital={countries[index].capital}
+				alpha3Code={countries[index].alpha3Code}
+				key={uuid()}
+			/>
+		</div>
+	);
+	const Example = () => (
+		<FixedSizeList
+			height={1000}
+			width={1000}
+			itemSize={700}
+			itemCount={countries.length}>
+			{Row}
+		</FixedSizeList>
+	);
+
 	return (
 		<HomeContainer>
 			<Container>
@@ -55,7 +79,10 @@ const Home = () => {
 						setCountriesDisplay={setCountriesDisplay}
 					/>
 				</Box>
-				<Grid container spacing={5}>
+
+				<Example />
+
+				{/* <Grid container spacing={5}>
 					{countriesDisplay.map(country => (
 						<CountryCard
 							name={country.name}
@@ -67,7 +94,7 @@ const Home = () => {
 							key={uuid()}
 						/>
 					))}
-				</Grid>
+				</Grid> */}
 			</Container>
 		</HomeContainer>
 	);

@@ -22,6 +22,7 @@ export const Flag = styled.img`
 	min-height: 20rem;
 	max-height: 20rem;
 	object-fit: cover;
+	object-position: 50% 50%;
 `;
 
 export const Name = styled.p`
