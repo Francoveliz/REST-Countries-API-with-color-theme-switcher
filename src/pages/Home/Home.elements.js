@@ -4,6 +4,7 @@ import { device } from "../../assets/style/device";
 export const HomeContainer = styled.div`
 	display: flex;
 	flex-direction: column;
+	overflow-y: hidden;
 `;
 
 export const CountriesContainer = styled.div`
@@ -18,6 +19,6 @@ export const CountriesContainer = styled.div`
 export const Filters = styled.div`
 	@media${device.desktop} {
 		display: flex;
-		justify-content: space-between;w
+		justify-content: space-between;
 	}
 `;

@@ -9,7 +9,6 @@ export const DetailContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding: 1rem 1rem 5rem 1rem;
 	font-size: 1.2rem;
 	@media${device.desktop} {
 		display: grid;
