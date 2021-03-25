@@ -14,7 +14,7 @@ export const AppContextProvider = ({ children }) => {
 		);
 		const data = response.data;
 		setCountries(() => [...data]);
-		setCountriesDisplay(() => [...data]);
+		setCountriesDisplay(() => [...data.slice(0, 10)]);
 	};
 
 	return (
