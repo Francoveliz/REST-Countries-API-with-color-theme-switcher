@@ -10,6 +10,7 @@ import uuid from "react-uuid";
 import { useAppContext } from "../../context/context";
 import { Container, Grid, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const useStyles = makeStyles(theme => ({
 	filters: {
@@ -56,6 +57,22 @@ const Home = () => {
 					/>
 				</Box>
 
+				{/* test */}
+				<InfiniteScroll dataLength={countriesDisplay.length}>
+					{countriesDisplay.map(country => (
+						<CountryCard
+							name={country.name}
+							flag={country.flag}
+							population={country.population}
+							region={country.region}
+							capital={country.capital}
+							alpha3Code={country.alpha3Code}
+							key={uuid()}
+						/>
+					))}
+				</InfiniteScroll>
+
+				{/* /test */}
 				{/* <Grid container spacing={5}>
 					{countriesDisplay.map(country => (
 						<CountryCard
