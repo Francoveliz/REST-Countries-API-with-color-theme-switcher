@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchBar, FilterRegion, CountryCard } from "./components";
 import {
 	HomeContainer,
@@ -27,16 +27,24 @@ const useStyles = makeStyles(theme => ({
 
 const Home = () => {
 	const classes = useStyles();
-
+	const [page, setPage] = useState(6);
 	const {
 		fetchData,
 		countries,
+		setCountries,
 		setCountriesDisplay,
 		countriesDisplay,
+		setCountriesToRender,
+		countriesToRender,
 	} = useAppContext();
 
+	const initalFunc = async () => {
+		const data = await fetchData();
+		setCountries(() => [...data]);
+	};
+
 	useEffect(() => {
-		fetchData();
+		initalFunc();
 	}, []);
 
 	return (
@@ -57,9 +65,18 @@ const Home = () => {
 					/>
 				</Box>
 
+				<button onClick={() => setPage(() => page + 1)}>
+					{" "}
+					aumentar page
+				</button>
+
 				{/* test */}
-				<InfiniteScroll dataLength={countriesDisplay.length}>
-					{countriesDisplay.map(country => (
+				<InfiniteScroll
+					dataLength={countries.slice(0, page).length}
+					next={() => setPage(() => page + 6)}
+					hasMore={true}
+					className="MuiGrid-container MuiGrid-spacing-xs-3">
+					{countries.slice(0, page).map(country => (
 						<CountryCard
 							name={country.name}
 							flag={country.flag}

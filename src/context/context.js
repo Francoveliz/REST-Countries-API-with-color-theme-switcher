@@ -7,14 +7,14 @@ export const AppContextProvider = ({ children }) => {
 	const [theme, setTheme] = useState("dark");
 	const [countries, setCountries] = useState([]);
 	const [countriesDisplay, setCountriesDisplay] = useState([]);
+	const [countriesToRender, setCountriesToRender] = useState(6);
 
 	const fetchData = async () => {
 		const response = await axios.get(
 			"https://restcountries.eu/rest/v2/all"
 		);
-		const data = response.data;
-		setCountries(() => [...data]);
-		setCountriesDisplay(() => [...data.slice(0, 10)]);
+		const data = await response.data;
+		return data;
 	};
 
 	return (
@@ -27,6 +27,8 @@ export const AppContextProvider = ({ children }) => {
 				fetchData,
 				theme,
 				setTheme,
+				countriesToRender,
+				setCountriesToRender,
 			}}>
 			{children}
 		</AppContext.Provider>
