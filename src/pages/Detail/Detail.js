@@ -21,9 +21,11 @@ import Box from "@material-ui/core/Box";
 
 import { Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
+import { LoadingAnimation } from "../../components";
 
 const Detail = ({ match }) => {
 	const { countries } = useAppContext();
+	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState({
 		currencies: [],
 		languages: [],
@@ -48,7 +50,9 @@ const Detail = ({ match }) => {
 		const response = await axios.get(
 			`https://restcountries.eu/rest/v2/alpha/${match.params.code}`
 		);
-		setData({ ...response.data });
+		const data = await response.data;
+		setData({ ...data });
+		setIsLoading(false);
 	};
 
 	useEffect(() => {
@@ -58,16 +62,16 @@ const Detail = ({ match }) => {
 
 	const setBorderCountriesBtns = borders.map((border, index) => (
 		<Box m={1} key={index}>
-			<Button
-				onClick={() => window.scrollTo(0, 0)}
-				variant="contained"
-				color="primary">
-				<Link
-					to={`/${border}`}
-					style={{ textDecoration: "none", color: "#fff" }}>
+			<Link
+				to={`/${border}`}
+				style={{ textDecoration: "none", color: "#fff" }}>
+				<Button
+					onClick={() => window.scrollTo(0, 0)}
+					variant="contained"
+					color="primary">
 					{countries.filter(el => el.alpha3Code === border)[0].name}
-				</Link>
-			</Button>
+				</Button>
+			</Link>
 		</Box>
 	));
 
@@ -79,71 +83,73 @@ const Detail = ({ match }) => {
 		<span key={index}>{el.name}, </span>
 	));
 
+	const detailContent = (
+		<DetailContent>
+			<Flag src={flag} />
+			<Text>
+				<Name>{name}</Name>
+				<Info>
+					<p>
+						<Bold>Native name: </Bold>
+						{nativeName}
+					</p>
+					<p>
+						<Bold>Population: </Bold>
+						{population}
+					</p>
+					<p>
+						<Bold>region: </Bold>
+						{region}
+					</p>
+					<p>
+						<Bold>sub region: </Bold>
+						{subregion}
+					</p>
+					<p>
+						<Bold>capital: </Bold>
+						{capital}
+					</p>
+					<p>
+						<Bold>top level domain: </Bold>
+						{topLevelDomain}
+					</p>
+					<p>
+						<Bold>currencies: </Bold>
+						{setCurrencies}
+					</p>
+					<p>
+						<Bold>languages: </Bold>
+						{setLanguages}
+					</p>
+					<p>
+						<Bold>region: </Bold>
+						{region}
+					</p>
+				</Info>
+				<BorderCountriesContainer>
+					<BorderCountries>
+						<BorderCountriesTitle>border countries:</BorderCountriesTitle>
+						{setBorderCountriesBtns}
+					</BorderCountries>
+				</BorderCountriesContainer>
+			</Text>
+		</DetailContent>
+	);
+
 	return (
 		<Container>
 			<DetailContainer>
-				<Box display="block">
-					<Link style={{ textDecoration: "none" }} to="/">
+				<Link style={{ textDecoration: "none" }} to="/">
+					<Box display="block">
 						<Button
 							variant="contained"
 							color="primary"
 							startIcon={<LeftArrow />}>
 							Back
 						</Button>
-					</Link>
-				</Box>
-				<DetailContent>
-					<Flag src={flag} />
-					<Text>
-						<Name>{name}</Name>
-						<Info>
-							<p>
-								<Bold>Native name: </Bold>
-								{nativeName}
-							</p>
-							<p>
-								<Bold>Population: </Bold>
-								{population}
-							</p>
-							<p>
-								<Bold>region: </Bold>
-								{region}
-							</p>
-							<p>
-								<Bold>sub region: </Bold>
-								{subregion}
-							</p>
-							<p>
-								<Bold>capital: </Bold>
-								{capital}
-							</p>
-							<p>
-								<Bold>top level domain: </Bold>
-								{topLevelDomain}
-							</p>
-							<p>
-								<Bold>currencies: </Bold>
-								{setCurrencies}
-							</p>
-							<p>
-								<Bold>languages: </Bold>
-								{setLanguages}
-							</p>
-							<p>
-								<Bold>region: </Bold>
-								{region}
-							</p>
-						</Info>
-						<BorderCountriesContainer>
-							<BorderCountries>
-								<BorderCountriesTitle>
-									border countries:
-								</BorderCountriesTitle>
-								{setBorderCountriesBtns}
-							</BorderCountries>
-						</BorderCountriesContainer>
-					</Text>
-				</DetailContent>
+					</Box>
+				</Link>
+				{isLoading ? <LoadingAnimation /> : detailContent}
 			</DetailContainer>
 		</Container>
 	);

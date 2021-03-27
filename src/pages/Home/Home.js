@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { SearchBar, FilterRegion, CountryCard } from "./components";
+import { LoadingAnimation } from "../../components";
 import {
 	HomeContainer,
 	CountriesContainer,
@@ -11,6 +12,7 @@ import { useAppContext } from "../../context/context";
 import { Container, Grid, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import InfiniteScroll from "react-infinite-scroll-component";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles(theme => ({
 	filters: {
@@ -26,26 +28,60 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Home = () => {
+	const [isLoading, setIsLoading] = useState(true);
 	const classes = useStyles();
-	const [page, setPage] = useState(6);
+
 	const {
 		fetchData,
 		countries,
 		setCountries,
 		setCountriesDisplay,
 		countriesDisplay,
-		setCountriesToRender,
-		countriesToRender,
+		countriesCache,
+		setCountriesCache,
+		page,
+		setPage,
 	} = useAppContext();
 
 	const initalFunc = async () => {
-		const data = await fetchData();
-		setCountries(() => [...data]);
+		if (countries.length === 0) {
+			const data = await fetchData();
+			setCountries(() => [...data]);
+			setCountriesDisplay(() => data.slice(0, page));
+			setCountriesCache(() => [...data]);
+			setIsLoading(false);
+		} else {
+			setIsLoading(false);
+		}
 	};
 
 	useEffect(() => {
 		initalFunc();
 	}, []);
+
+	useEffect(() => {
+		setCountriesDisplay(() => countriesCache.slice(0, page));
+	}, [page]);
+
+	const countriesComponents = (
+		<InfiniteScroll
+			dataLength={countriesDisplay.length}
+			next={() => setPage(() => page + 6)}
+			hasMore={true}
+			className="MuiGrid-container MuiGrid-spacing-xs-3">
+			{countriesDisplay.map(country => (
+				<CountryCard
+					name={country.name}
+					flag={country.flag}
+					population={country.population}
+					region={country.region}
+					capital={country.capital}
+					alpha3Code={country.alpha3Code}
+					key={uuid()}
+				/>
+			))}
+		</InfiniteScroll>
+	);
 
 	return (
 		<HomeContainer>
@@ -58,51 +94,9 @@ const Home = () => {
 					<Box className={classes.searchBar}>
 						<SearchBar className={classes.searchBar} />
 					</Box>
-
-					<FilterRegion
-						countries={countries}
-						setCountriesDisplay={setCountriesDisplay}
-					/>
+					<FilterRegion />
 				</Box>
-
-				<button onClick={() => setPage(() => page + 1)}>
-					{" "}
-					aumentar page
-				</button>
-
-				{/* test */}
-				<InfiniteScroll
-					dataLength={countries.slice(0, page).length}
-					next={() => setPage(() => page + 6)}
-					hasMore={true}
-					className="MuiGrid-container MuiGrid-spacing-xs-3">
-					{countries.slice(0, page).map(country => (
-						<CountryCard
-							name={country.name}
-							flag={country.flag}
-							population={country.population}
-							region={country.region}
-							capital={country.capital}
-							alpha3Code={country.alpha3Code}
-							key={uuid()}
-						/>
-					))}
-				</InfiniteScroll>
-
-				{/* /test */}
-				{/* <Grid container spacing={5}>
-					{countriesDisplay.map(country => (
-						<CountryCard
-							name={country.name}
-							flag={country.flag}
-							population={country.population}
-							region={country.region}
-							capital={country.capital}
-							alpha3Code={country.alpha3Code}
-							key={uuid()}
-						/>
-					))}
-				</Grid> */}
+				{isLoading ? <LoadingAnimation /> : countriesComponents}
 			</Container>
 		</HomeContainer>
 	);

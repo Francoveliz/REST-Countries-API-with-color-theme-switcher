@@ -4,10 +4,12 @@ import axios from "axios";
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
+	const [page, setPage] = useState(6);
 	const [theme, setTheme] = useState("dark");
 	const [countries, setCountries] = useState([]);
 	const [countriesDisplay, setCountriesDisplay] = useState([]);
-	const [countriesToRender, setCountriesToRender] = useState(6);
+	const [countriesCache, setCountriesCache] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const fetchData = async () => {
 		const response = await axios.get(
@@ -27,8 +29,12 @@ export const AppContextProvider = ({ children }) => {
 				fetchData,
 				theme,
 				setTheme,
-				countriesToRender,
-				setCountriesToRender,
+				page,
+				setPage,
+				countriesCache,
+				setCountriesCache,
+				isLoading,
+				setIsLoading,
 			}}>
 			{children}
 		</AppContext.Provider>

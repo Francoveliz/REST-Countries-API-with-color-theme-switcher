@@ -20,7 +20,7 @@ const CountryCard = ({
 	alpha3Code,
 }) => {
 	return (
-		<Grid item lg={4}>
+		<Grid item lg={4} md={6}>
 			<Flag src={flag} alt="" />
 			<CountryCardText>
 				<Name>{name}</Name>
@@ -36,17 +36,16 @@ const CountryCard = ({
 					<Bold>Capital: </Bold>
 					{capital}
 				</p>
-				{/* <ViewMoreBtn to={`/${alpha3Code}`}>...View more </ViewMoreBtn> */}
 				<Box display="flex" justifyContent="flex-end">
-					<Box display="block" mt={3}>
-						<Button variant="contained" color="primary">
-							<Link
-								style={{ textDecoration: "none", color: "#fff" }}
-								to={`/${alpha3Code}`}>
+					<Link
+						style={{ textDecoration: "none", color: "#fff" }}
+						to={`/${alpha3Code}`}>
+						<Box display="block" mt={3}>
+							<Button variant="contained" color="primary">
 								...View more
-							</Link>
-						</Button>
-					</Box>
+							</Button>
+						</Box>
+					</Link>
 				</Box>
 			</CountryCardText>
 		</Grid>

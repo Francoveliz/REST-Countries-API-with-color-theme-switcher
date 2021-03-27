@@ -1,15 +1,26 @@
 import React from "react";
 import { DropDownList } from "./FilterRegion.elements";
+import { useAppContext } from "../../../../context/context";
 
-const FilterRegion = ({ countries, setCountriesDisplay }) => {
+const FilterRegion = () => {
+	const {
+		page,
+		countries,
+		setCountriesDisplay,
+		countriesCache,
+		setCountriesCache,
+	} = useAppContext();
+
 	const filterByRegion = region => {
 		if (region) {
 			const filterCountries = countries.filter(
 				country => country.region === region
 			);
-			setCountriesDisplay(() => filterCountries);
+			setCountriesCache(() => filterCountries);
+			setCountriesDisplay(() => filterCountries.slice(0, 6));
 		} else {
-			setCountriesDisplay(countries);
+			setCountriesCache(() => countries);
+			setCountriesDisplay(() => countries.slice(0, 6));
 		}
 	};
 

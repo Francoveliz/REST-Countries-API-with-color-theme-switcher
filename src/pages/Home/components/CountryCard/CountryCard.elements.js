@@ -19,6 +19,7 @@ export const CountryCardText = styled.div`
 export const Flag = styled.img`
 	border-radius: 5px 5px 0 0;
 	width: 100%;
+	height: auto;
 	min-height: 20rem;
 	max-height: 20rem;
 	object-fit: cover;
