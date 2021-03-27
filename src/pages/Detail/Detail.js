@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAppContext } from "../../context/context";
 import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
+
 import {
 	Flag,
 	DetailContainer,
@@ -18,12 +20,19 @@ import {
 } from "./Detail.elements";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
-
 import { Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import { LoadingAnimation } from "../../components";
+import Typography from "@material-ui/core/Typography";
+
+const useStyles = makeStyles({
+	bold: {
+		fontWeight: "bold",
+	},
+});
 
 const Detail = ({ match }) => {
+	const classes = useStyles();
 	const { countries } = useAppContext();
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState({
@@ -75,60 +84,71 @@ const Detail = ({ match }) => {
 		</Box>
 	));
 
-	const setLanguages = languages.map((el, index) => (
-		<span key={index}>{el.name}, </span>
-	));
+	const setLanguages = languages.map((el, index) => `${el.name}`);
 
-	const setCurrencies = currencies.map((el, index) => (
-		<span key={index}>{el.name}, </span>
-	));
+	const setCurrencies = currencies.map((el, index) => `${el.name}`);
+
+	const names = [
+		{
+			name: "Native name",
+			variable: nativeName,
+		},
+		{
+			name: "Population",
+			variable: population,
+		},
+		{
+			name: "region",
+			variable: region,
+		},
+		{
+			name: "Sub region",
+			variable: subregion,
+		},
+		{
+			name: "Capital",
+			variable: capital,
+		},
+		{
+			name: "top level domain",
+			variable: topLevelDomain,
+		},
+		{
+			name: "currencies",
+			variable: setCurrencies,
+		},
+		{
+			name: "languages",
+			variable: setLanguages,
+		},
+		{
+			name: "region",
+			variable: region,
+		},
+	];
 
 	const detailContent = (
 		<DetailContent>
 			<Flag src={flag} />
 			<Text>
-				<Name>{name}</Name>
+				<Box mb={5}>
+					<Typography variant="h4">{name}</Typography>
+				</Box>
 				<Info>
-					<p>
-						<Bold>Native name: </Bold>
-						{nativeName}
-					</p>
-					<p>
-						<Bold>Population: </Bold>
-						{population}
-					</p>
-					<p>
-						<Bold>region: </Bold>
-						{region}
-					</p>
-					<p>
-						<Bold>sub region: </Bold>
-						{subregion}
-					</p>
-					<p>
-						<Bold>capital: </Bold>
-						{capital}
-					</p>
-					<p>
-						<Bold>top level domain: </Bold>
-						{topLevelDomain}
-					</p>
-					<p>
-						<Bold>currencies: </Bold>
-						{setCurrencies}
-					</p>
-					<p>
-						<Bold>languages: </Bold>
-						{setLanguages}
-					</p>
-					<p>
-						<Bold>region: </Bold>
-						{region}
-					</p>
+					{names.map(element => (
+						<Box mb={1}>
+							<Typography
+								className={classes.bold}
+								component="span">{`${element.name}: `}</Typography>
+							<Typography component="span">{`${element.variable}`}</Typography>
+						</Box>
+					))}
 				</Info>
 				<BorderCountriesContainer>
 					<BorderCountries>
-						<BorderCountriesTitle>border countries:</BorderCountriesTitle>
+						<Typography className={classes.bold} gutterBottom>
+							Border countries:
+						</Typography>
 						{setBorderCountriesBtns}
 					</BorderCountries>
 				</BorderCountriesContainer>
@@ -138,19 +158,21 @@ const Detail = ({ match }) => {
 
 	return (
 		<Container>
-			<DetailContainer>
-				<Link style={{ textDecoration: "none" }} to="/">
-					<Box display="block">
-						<Button
-							variant="contained"
-							color="primary"
-							startIcon={<LeftArrow />}>
-							Back
-						</Button>
-					</Box>
-				</Link>
+			<Box pb={10}>
+				<DetailContainer>
+					<Link style={{ textDecoration: "none" }} to="/">
+						<Box display="block">
+							<Button
+								variant="contained"
+								color="primary"
+								startIcon={<LeftArrow />}>
+								Back
+							</Button>
+						</Box>
+					</Link>
+				</DetailContainer>
 				{isLoading ? <LoadingAnimation /> : detailContent}
-			</DetailContainer>
+			</Box>
 		</Container>
 	);
 };
