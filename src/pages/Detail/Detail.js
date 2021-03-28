@@ -145,12 +145,12 @@ const Detail = ({ match }) => {
 					))}
 				</Info>
 				<BorderCountriesContainer>
-					<BorderCountries>
-						<Typography className={classes.bold} gutterBottom paragraph>
+					<Box display="block">
+						<Typography className={classes.bold}>
 							Border countries:
 						</Typography>
-						{setBorderCountriesBtns}
-					</BorderCountries>
+					</Box>
+					<BorderCountries>{setBorderCountriesBtns}</BorderCountries>
 				</BorderCountriesContainer>
 			</Text>
 		</DetailContent>
