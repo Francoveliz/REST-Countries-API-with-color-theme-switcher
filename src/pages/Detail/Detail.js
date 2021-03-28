@@ -146,7 +146,7 @@ const Detail = ({ match }) => {
 				</Info>
 				<BorderCountriesContainer>
 					<BorderCountries>
-						<Typography className={classes.bold} gutterBottom>
+						<Typography className={classes.bold} gutterBottom paragraph>
 							Border countries:
 						</Typography>
 						{setBorderCountriesBtns}
