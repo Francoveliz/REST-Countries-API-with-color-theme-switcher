@@ -41,6 +41,7 @@ const Home = () => {
 		setCountriesCache,
 		page,
 		setPage,
+		searchText,
 	} = useAppContext();
 
 	const initalFunc = async () => {
@@ -60,6 +61,7 @@ const Home = () => {
 	}, []);
 
 	useEffect(() => {
+		if (searchText) return;
 		setCountriesDisplay(() => countriesCache.slice(0, page));
 	}, [page]);
 

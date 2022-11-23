@@ -51,7 +51,7 @@ const CountryCard = ({
 						{name}
 					</Typography>
 				</Box>
-				{details.map(element => (
+				{details.map((element) => (
 					<Box mb={1}>
 						<Typography
 							className={classes.bold}
@@ -65,7 +65,7 @@ const CountryCard = ({
 						to={`/${alpha3Code}`}>
 						<Box display="block" mt={3}>
 							<Button variant="contained" color="primary">
-								...View more
+								View more
 							</Button>
 						</Box>
 					</Link>

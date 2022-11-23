@@ -10,6 +10,7 @@ export const AppContextProvider = ({ children }) => {
 	const [countriesDisplay, setCountriesDisplay] = useState([]);
 	const [countriesCache, setCountriesCache] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [searchText, setSearchText] = useState("");
 
 	const fetchData = async () => {
 		const response = await axios.get("https://restcountries.com/v3.1/all");
@@ -33,6 +34,8 @@ export const AppContextProvider = ({ children }) => {
 				setCountriesCache,
 				isLoading,
 				setIsLoading,
+				searchText,
+				setSearchText,
 			}}>
 			{children}
 		</AppContext.Provider>

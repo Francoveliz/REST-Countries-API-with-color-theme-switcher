@@ -8,8 +8,8 @@ import {
 } from "./SearchBar.elements";
 
 const SearchBar = () => {
-	const { setCountriesDisplay, countries } = useAppContext();
-	const [searchText, setSearchText] = useState("");
+	const { setCountriesDisplay, countries, searchText, setSearchText } =
+		useAppContext();
 
 	const searchOnChangeHandler = (e) => {
 		setSearchText(e.target.value);
