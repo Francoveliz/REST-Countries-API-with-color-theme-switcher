@@ -42,24 +42,21 @@ const Detail = ({ match }) => {
 	});
 
 	const {
-		flag,
+		flags,
 		name,
-		nativeName,
 		population,
 		region,
 		subregion,
 		capital,
-		topLevelDomain,
 		currencies,
 		languages,
-		borders,
 	} = data;
 
 	const fetchData = async () => {
 		const response = await axios.get(
-			`https://restcountries.eu/rest/v2/alpha/${match.params.code}`
+			`https://restcountries.com/v3.1/alpha/${match.params.code}`
 		);
-		const data = await response.data;
+		const data = await response.data[0];
 		setData({ ...data });
 		setIsLoading(false);
 	};
@@ -69,30 +66,25 @@ const Detail = ({ match }) => {
 		fetchData();
 	}, [match.params.code]);
 
-	const setBorderCountriesBtns = borders.map((border, index) => (
-		<Box m={1} key={index}>
-			<Link
-				to={`/${border}`}
-				style={{ textDecoration: "none", color: "#fff" }}>
-				<Button
-					onClick={() => window.scrollTo(0, 0)}
-					variant="contained"
-					color="primary">
-					{countries.filter(el => el.alpha3Code === border)[0].name}
-				</Button>
-			</Link>
-		</Box>
-	));
+	const setLanguages = () => {
+		return Object.keys(languages).reduce(
+			(languagesNames, languageAcronym) => {
+				return [...languagesNames, languages[languageAcronym]];
+			},
+			[]
+		);
+	};
 
-	const setLanguages = languages.map((el, index) => `${el.name}`);
-
-	const setCurrencies = currencies.map((el, index) => `${el.name}`);
+	const setCurrencies = () => {
+		return Object.keys(currencies).reduce(
+			(currenciesNames, currencieAcronym) => {
+				return [...currenciesNames, currencies[currencieAcronym].name];
+			},
+			[]
+		);
+	};
 
 	const names = [
-		{
-			name: "Native name",
-			variable: nativeName,
-		},
 		{
 			name: "Population",
 			variable: population,
@@ -110,16 +102,12 @@ const Detail = ({ match }) => {
 			variable: capital,
 		},
 		{
-			name: "top level domain",
-			variable: topLevelDomain,
-		},
-		{
 			name: "currencies",
-			variable: setCurrencies,
+			variable: setCurrencies(),
 		},
 		{
 			name: "languages",
-			variable: setLanguages,
+			variable: setLanguages(),
 		},
 		{
 			name: "region",
@@ -129,13 +117,13 @@ const Detail = ({ match }) => {
 
 	const detailContent = (
 		<DetailContent>
-			<Flag src={flag} />
+			<Flag src={flags ? flags.svg : ""} />
 			<Text>
 				<Box mb={5}>
-					<Typography variant="h4">{name}</Typography>
+					<Typography variant="h4">{name ? name.common : ""}</Typography>
 				</Box>
 				<Info>
-					{names.map(element => (
+					{names.map((element) => (
 						<Box mb={1}>
 							<Typography
 								className={classes.bold}
@@ -144,14 +132,6 @@ const Detail = ({ match }) => {
 						</Box>
 					))}
 				</Info>
-				<BorderCountriesContainer>
-					<Box display="block">
-						<Typography className={classes.bold}>
-							Border countries:
-						</Typography>
-					</Box>
-					<BorderCountries>{setBorderCountriesBtns}</BorderCountries>
-				</BorderCountriesContainer>
 			</Text>
 		</DetailContent>
 	);

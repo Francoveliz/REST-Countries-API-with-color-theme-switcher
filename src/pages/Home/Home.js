@@ -14,7 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	filters: {
 		[theme.breakpoints.down("xs")]: {
 			flexDirection: "column",
@@ -69,7 +69,7 @@ const Home = () => {
 			next={() => setPage(() => page + 6)}
 			hasMore={true}
 			className="MuiGrid-container MuiGrid-spacing-xs-3">
-			{countriesDisplay.map(country => (
+			{countriesDisplay.map((country) => (
 				<CountryCard
 					name={country.name}
 					flag={country.flag}
@@ -96,7 +96,27 @@ const Home = () => {
 					</Box>
 					<FilterRegion />
 				</Box>
-				{isLoading ? <LoadingAnimation /> : countriesComponents}
+				{isLoading ? (
+					<LoadingAnimation />
+				) : (
+					<InfiniteScroll
+						dataLength={countriesDisplay.length}
+						next={() => setPage(() => page + 6)}
+						hasMore={true}
+						className="MuiGrid-container MuiGrid-spacing-xs-3">
+						{countriesDisplay.map((country) => (
+							<CountryCard
+								name={country.name.common}
+								flag={country.flags.svg}
+								population={country.population}
+								region={country.region}
+								capital={country.capital ? country.capital[0] : "none"}
+								alpha3Code={country.cca3}
+								key={uuid()}
+							/>
+						))}
+					</InfiniteScroll>
+				)}
 			</Container>
 		</HomeContainer>
 	);

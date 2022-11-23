@@ -8,29 +8,32 @@ import {
 } from "./SearchBar.elements";
 
 const SearchBar = () => {
-	const { setCountriesDisplay } = useAppContext();
+	const { setCountriesDisplay, countries } = useAppContext();
 	const [searchText, setSearchText] = useState("");
 
-	const searchOnChangeHandler = e => {
+	const searchOnChangeHandler = (e) => {
 		setSearchText(e.target.value);
 	};
 
-	const getSearch = async e => {
+	const getSearch = async (e) => {
 		e.preventDefault();
+		if (!searchText) {
+			setCountriesDisplay(() => countries.slice(0, 12));
+			return;
+		}
 		const response = await axios.get(
-			`https://restcountries.eu/rest/v2/name/${searchText}`
+			`https://restcountries.com/v3.1/name/${searchText}`
 		);
 		const data = await response.data;
 		setCountriesDisplay(() => data);
-		setSearchText("");
 	};
 
 	return (
-		<SearchBarContainer onSubmit={e => getSearch(e)}>
+		<SearchBarContainer onSubmit={(e) => getSearch(e)}>
 			<Loupe onClick={getSearch} />
 			<SearchBarElement
 				value={searchText}
-				onChange={e => searchOnChangeHandler(e)}
+				onChange={(e) => searchOnChangeHandler(e)}
 				placeholder="Search for a country..."
 			/>
 		</SearchBarContainer>

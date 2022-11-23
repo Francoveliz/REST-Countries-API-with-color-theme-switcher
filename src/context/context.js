@@ -12,9 +12,7 @@ export const AppContextProvider = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	const fetchData = async () => {
-		const response = await axios.get(
-			"https://restcountries.eu/rest/v2/all"
-		);
+		const response = await axios.get("https://restcountries.com/v3.1/all");
 		const data = await response.data;
 		return data;
 	};
